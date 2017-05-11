@@ -1,2 +1,2 @@
 
-include "my-lib", "product"
+include "my-lib", "product", "security"

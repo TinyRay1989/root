@@ -2,17 +2,15 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'eclipse'
 
-    repositories {
-       mavenCentral()
-    }
+    repositories { mavenCentral() }
 
-    dependencies {
-        testCompile 'junit:junit:4.8.2'
-    }
+    dependencies { testCompile 'junit:junit:4.8.2' }
 
     version = '1.0'
 
-    jar {
-        manifest.attributes provider: 'my cool company'
-    }
+    jar { manifest.attributes provider: 'my cool company' }
+}
+allprojects {
+    apply plugin: 'idea'
+    task allTask << { println project.name }
 }
