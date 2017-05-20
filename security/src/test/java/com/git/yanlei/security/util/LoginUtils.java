@@ -7,11 +7,12 @@ import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.Factory;
-
-import com.git.yanlei.security.AuthenticatorTests;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LoginUtils {
-
+    public static final Logger log = LoggerFactory.getLogger(LoginUtils.class);
+    
     public static Subject loginAs_ZhangSan(String iniResourcePath) {
         String username = "zhangsan";
         String password = "123";
@@ -33,10 +34,10 @@ public class LoginUtils {
         try {
             subject.login(token);
         } catch (AuthenticationException e) {
-            AuthenticatorTests.log.info("{}登陆失败", username, e);
+            log.info("{}登陆失败", username, e);
             return subject;
         }
-        AuthenticatorTests.log.info("{}登陆成功", username);
+        log.info("{}登陆成功", username);
         return subject;
     }
 
