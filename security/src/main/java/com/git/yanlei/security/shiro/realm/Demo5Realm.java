@@ -7,7 +7,6 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.authz.permission.WildcardPermission;
@@ -17,19 +16,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import com.git.yanlei.security.shiro.authorizer.permission.BitPermission;
 
 public class Demo5Realm extends AuthorizingRealm{
-
-    private static final String NAME = "demo1Realm";
-
-    @Override
-    public String getName() {
-        return NAME;
-    }
-
-    @Override
-    public boolean supports(AuthenticationToken token) {
-        return token instanceof UsernamePasswordToken;
-    }
-
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)

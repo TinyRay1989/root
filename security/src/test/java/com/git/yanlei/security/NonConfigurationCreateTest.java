@@ -42,7 +42,7 @@ public class NonConfigurationCreateTest {
         ds.setUsername("root");
         ds.setPassword("root");
         realm.setDataSource(ds);
-        realm.setPermissionsLookupEnabled(true);
+        //realm.setPermissionsLookupEnabled(true);
         securityManager.setRealm(realm);
         
         SecurityUtils.setSecurityManager(securityManager);
