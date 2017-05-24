@@ -37,7 +37,7 @@ public class LoginUtils {
         return login(iniResourcePath, username, password);
     }
 
-    private static Subject login(String iniResourcePath, String username, String password) {
+    public static Subject login(String iniResourcePath, String username, String password) {
         Factory<SecurityManager> factory = new IniSecurityManagerFactory(iniResourcePath);
         SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
