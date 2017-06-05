@@ -1,2 +1,2 @@
 
-include "my-lib", "product", "security-shiro"
+include "my-lib", "product", "security-shiro", "persistence-jpa", "persistence-jpa-without-persistence.xml", "persistence-spring-data-jpa"
