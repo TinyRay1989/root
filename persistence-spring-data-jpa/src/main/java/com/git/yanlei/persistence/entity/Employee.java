@@ -1,10 +1,11 @@
-package com.git.yanlei.jpa.entity;
+package com.git.yanlei.persistence.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +18,9 @@ public class Employee {
     private String ename;
     private double salary;
     private String deg;
+
+    @OneToOne
+    private Department department;
 
     public Employee(String ename, double salary, String deg) {
         super();
@@ -31,6 +35,23 @@ public class Employee {
         this.ename = ename;
         this.salary = salary;
         this.deg = deg;
+    }
+
+    public Employee(String ename, double salary, String deg, Department department) {
+        super();
+        this.ename = ename;
+        this.salary = salary;
+        this.deg = deg;
+        this.department = department;
+    }
+
+    public Employee(int eid, String ename, double salary, String deg, Department department) {
+        super();
+        this.eid = eid;
+        this.ename = ename;
+        this.salary = salary;
+        this.deg = deg;
+        this.department = department;
     }
 
     public Employee() {
@@ -72,7 +93,7 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee [eid=" + eid + ", ename=" + ename + ", salary=" + salary + ", deg=" + deg
-                + "]";
+                + ", department=" + department + "]";
     }
 
 }

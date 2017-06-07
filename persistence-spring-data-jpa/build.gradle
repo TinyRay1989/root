@@ -29,8 +29,14 @@ repositories {
 
 dependencies {
     compile group: 'commons-collections', name: 'commons-collections', version: '3.+'
+    compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile group: 'com.alibaba', name: 'druid', version: '1.0.29'
+    runtime group: 'mysql', name: 'mysql-connector-java', version: '5.1.42'
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile(group: 'junit', name: 'junit', version: '4.12'){
+        force = true
+    }
 }
 
 test {
