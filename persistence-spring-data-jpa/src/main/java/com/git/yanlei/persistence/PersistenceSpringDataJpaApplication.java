@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 
 @EnableTransactionManagement
 @SpringBootApplication
+//@EnableCaching
 public class PersistenceSpringDataJpaApplication implements TransactionManagementConfigurer {
 
     @Resource(name = "transactionManager")
