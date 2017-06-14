@@ -1,7 +1,6 @@
 package com.git.yanlei.persistence.entity;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -9,7 +8,6 @@ import javax.persistence.Table;
 @Entity(name = "TeachingStaff")
 @Table(name = "T_TEACHING_STAFF")
 @PrimaryKeyJoinColumn(name =  "C_ID")
-@DiscriminatorValue("1")
 public class TeachingStaff extends Staff {
 
     private static final long serialVersionUID = -7845725089145034704L;

@@ -1,11 +1,18 @@
 package com.git.yanlei.jpa.entity;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -17,9 +24,35 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @OneToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    //@JoinColumn(name = "department_id")
+    @JoinTable(
+        name = "T_DEPARTMENT_EMPLOYEE", 
+        joinColumns = {
+            @JoinColumn(
+                name = "department_id", 
+                nullable = false,
+                foreignKey = @ForeignKey(
+                    name = "fk_departmentandemployee_department_on_department_id",
+                    foreignKeyDefinition = "none",
+                    value = ConstraintMode.NO_CONSTRAINT
+                )
+            )
+        }, 
+        inverseJoinColumns= {
+            @JoinColumn(
+                name = "employee_id", 
+                nullable = false,
+                foreignKey = @ForeignKey(
+                    name = "fk_departmentandemployee_employee_on_employee_id",
+                    foreignKeyDefinition = "none",
+                    value = ConstraintMode.NO_CONSTRAINT
+                )
+            )
+        }
+    )
     //@Transient
-    private List<Employee> employeeList;
+    private Set<Employee> employeeSet = new HashSet<Employee>();;
 
     public int getId() {
         return id;
@@ -37,17 +70,18 @@ public class Department {
         this.name = deptName;
     }
 
-    public List<Employee> getEmployeeList() {
-        return employeeList;
+    public Set<Employee> getEmployeeSet() {
+        return employeeSet;
     }
 
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
+    public void setEmployeeSet(Set<Employee> employeeSet) {
+        this.employeeSet = employeeSet;
     }
 
     @Override
     public String toString() {
-        return "Department [id=" + id + ", name=" + name + "]";
+        return "Department [id=" + id + ", name=" + name + ", employeeSet=" + employeeSet + "]";
     }
 
+    
 }

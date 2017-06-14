@@ -11,7 +11,7 @@
        user.dir - User's current working directory
        java.io.tmpdir - Default temp file path 
   -->
-  <diskStore path="user.dir/cache"/>
+  <diskStore path="./target/tmp"/>
 
   <!--
     Default Cache configuration. These will applied to caches programmatically created through
@@ -99,5 +99,17 @@
     timeToIdleSeconds="300"
     timeToLiveSeconds="600"
     overflowToDisk="true"/>
+
+  <!--
+    Sample cache named userCache
+    This cache contains 10000 users. users will always be held in memory.
+    They are not expired. 
+  -->
+  <cache name="userCache"
+    maxElementsInMemory="10000"
+    eternal="true"
+    timeToIdleSeconds="0"
+    timeToLiveSeconds="0"
+    overflowToDisk="false"/>
 
 </ehcache>

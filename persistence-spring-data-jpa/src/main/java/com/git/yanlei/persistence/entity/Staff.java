@@ -3,9 +3,6 @@ package com.git.yanlei.persistence.entity;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,8 +14,6 @@ import javax.persistence.Table;
 @Entity(name = "Staff")
 @Table(name = "T_STAFF")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "N_TYPE", discriminatorType = DiscriminatorType.INTEGER)
-@DiscriminatorValue("0")
 public class Staff implements Serializable {
     private static final long serialVersionUID = 6133945717170109155L;
 

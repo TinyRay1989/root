@@ -1,7 +1,9 @@
 package com.git.yanlei.jpa;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,6 +15,35 @@ import com.git.yanlei.jpa.entity.Department;
 import com.git.yanlei.jpa.entity.Employee;
 
 public class ORMTest {
+    
+    @Test
+    public void oneToOne() {
+        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+        EntityManager entitymanager = emfactory.createEntityManager();
+        entitymanager.getTransaction().begin();
+
+        // Create Department Entity
+        Department department = new Department();
+        department.setName("Development");
+        // Store Department
+        entitymanager.persist(department);
+
+        // Create Employee1 Entity
+        Employee employee1 = new Employee();
+        employee1.setEname("Satish");
+        employee1.setSalary(45000.0);
+        employee1.setDeg("Technical Writer");
+        employee1.setDepartment(department);
+
+
+        // Store Employees
+        entitymanager.persist(employee1);
+
+        entitymanager.getTransaction().commit();
+        entitymanager.close();
+        emfactory.close();
+    }
+    
     @Test
     public void manyToOne() {
         EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
@@ -64,6 +95,19 @@ public class ORMTest {
                 createEntityManager( );
         entitymanager.getTransaction( ).begin( );
         
+        Department department1 = getDepartment1();
+        Department department2 = getDepartment2();
+                
+        //Store Department
+        entitymanager.persist(department1);
+        entitymanager.persist(department2);
+        
+        entitymanager.getTransaction().commit();
+        entitymanager.close();
+        emfactory.close();
+    }
+
+    private Department getDepartment1() {
         //Create Employee1 Entity
         Employee employee1 = new Employee();
         employee1.setEname("Satish");
@@ -82,28 +126,49 @@ public class ORMTest {
         employee3.setSalary(50000.0);
         employee3.setDeg("Technical Writer");
         
-        //Store Employee
-        entitymanager.persist(employee1);
-        entitymanager.persist(employee2);
-        entitymanager.persist(employee3);
-        
         //Create Employeelist
-        List<Employee> emplist = new ArrayList<Employee>();
-        emplist.add(employee1);
-        emplist.add(employee2);
-        emplist.add(employee3);
+        Set<Employee> empSet = new HashSet<Employee>();
+        empSet.add(employee1);
+        empSet.add(employee2);
+        empSet.add(employee3);
         
         //Create Department Entity
         Department department= new Department();
         department.setName("Development");
-        department.setEmployeeList(emplist);
-                
-        //Store Department
-        entitymanager.persist(department);
+        department.setEmployeeSet(empSet);
+        return department;
+    }
+    
+    private Department getDepartment2() {
+        //Create Employee1 Entity
+        Employee employee1 = new Employee();
+        employee1.setEname("aaa");
+        employee1.setSalary(45000.0);
+        employee1.setDeg("Technical Writer");
         
-        entitymanager.getTransaction().commit();
-        entitymanager.close();
-        emfactory.close();
+        //Create Employee2 Entity
+        Employee employee2 = new Employee();
+        employee2.setEname("bbb");
+        employee2.setSalary(45000.0);
+        employee2.setDeg("Technical Writer");
+        
+        //Create Employee3 Entity
+        Employee employee3 = new Employee();
+        employee3.setEname("ccc");
+        employee3.setSalary(50000.0);
+        employee3.setDeg("Technical Writer");
+        
+        //Create Employeelist
+        Set<Employee> empSet = new HashSet<Employee>();
+        empSet.add(employee1);
+        empSet.add(employee2);
+        empSet.add(employee3);
+        
+        //Create Department Entity
+        Department department= new Department();
+        department.setName("driver");
+        department.setEmployeeSet(empSet);
+        return department;
     }
 
     @Test
@@ -111,6 +176,7 @@ public class ORMTest {
         EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
         EntityManager entitymanager = emfactory.createEntityManager();
         Employee employee = entitymanager.find(Employee.class, 1);
+        //Object o = entitymanager.createQuery("select e from Employee e left join Department d on e.department_id = d.id where d.id = '1'");
         System.out.println(employee);
     }
     

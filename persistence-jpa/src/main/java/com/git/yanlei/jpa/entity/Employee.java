@@ -1,9 +1,14 @@
 package com.git.yanlei.jpa.entity;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -20,7 +25,16 @@ public class Employee {
     private String ename;
     private double salary;
     private String deg;
-    //@OneToOne
+    @ManyToOne
+    @JoinColumn(
+            name = "department_id", 
+            nullable = false,
+            foreignKey = @ForeignKey(
+                    name = "fk_employee_department_on_department_id", 
+                    foreignKeyDefinition = "none",
+                    value = ConstraintMode.NO_CONSTRAINT
+                    )
+            )
     @Transient
     private Department department;
 
@@ -86,7 +100,8 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee [eid=" + eid + ", ename=" + ename + ", salary=" + salary + ", deg=" + deg
-                + ", department=" + department + "]";
+                + ", department=" + (department == null ? "null" : department.getId()) + "]";
     }
+
 
 }

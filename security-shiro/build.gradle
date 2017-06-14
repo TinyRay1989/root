@@ -23,8 +23,9 @@ dependencies {
     compile group: 'org.apache.shiro', name: 'shiro-spring', version: '1.3.2'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
     compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
-    compile group: 'com.alibaba', name: 'druid', version: '1.0.29'
+    compile group: 'org.hibernate', name: 'hibernate-ehcache'
     compile group: 'net.sf.ehcache', name: 'ehcache-core', version: '2.6.11'
+    compile group: 'com.alibaba', name: 'druid', version: '1.0.29'
     runtime group: 'mysql', name: 'mysql-connector-java', version: '5.1.42'
     providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
     testCompile('junit:junit:4.12')

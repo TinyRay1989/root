@@ -12,7 +12,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name = "T_DEPARTMENT")
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "entityCache1")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "entityCache")
 @Cacheable(true)
 public class Department {
     @Id

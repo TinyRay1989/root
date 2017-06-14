@@ -3,6 +3,7 @@ package com.git.yanlei.jpa.entity.single_table;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @DiscriminatorValue(value = "1")

@@ -28,7 +28,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity
 @Table(name = "T_EMPLOYEE")
-@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "entityCache")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "entityCache")
 @Cacheable(true)
 @NamedQuery(name = "findEmployeeByName", query = "select e from Employee e where e.ename = :name ")
 public class Employee {

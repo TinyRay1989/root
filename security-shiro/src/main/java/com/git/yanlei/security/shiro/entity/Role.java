@@ -1,16 +1,37 @@
 package com.git.yanlei.security.shiro.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "sys_roles")
 public class Role implements Serializable {
     private static final long serialVersionUID = 7037793812835469613L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     private String role; // 角色标识 程序中判断使用,如"admin"
     private String description; // 角色描述,UI界面显示使用
     private Boolean available = Boolean.FALSE; // 是否可用,如果不可用将不会添加给用户
+
+    @OneToMany
+    @JoinTable(
+        name = "sys_roles_permissions",
+        joinColumns = {@JoinColumn(name = "role_id")}, 
+        inverseJoinColumns = {@JoinColumn(name = "permission_id")}
+    )
+    private Set<Permission> permissions;
 
     public Role() {
     }
@@ -51,6 +72,14 @@ public class Role implements Serializable {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public Set<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Set<Permission> permissions) {
+        this.permissions = permissions;
     }
 
     @Override

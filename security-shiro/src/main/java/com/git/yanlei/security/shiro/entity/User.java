@@ -1,18 +1,46 @@
 package com.git.yanlei.security.shiro.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 
 @Entity
+@Table(name = "sys_users")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "userCache")
+@Cacheable(true)
 public class User implements Serializable {
     private static final long serialVersionUID = -5430245845857050638L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
     private String username;
     private String password;
     private String salt;
 
     private Boolean locked = Boolean.FALSE;
+
+    @OneToMany
+    @JoinTable(
+        name = "sys_users_roles",
+        joinColumns = {@JoinColumn(name = "user_id")}, 
+        inverseJoinColumns = {@JoinColumn(name = "role_id")}
+    )
+    private Set<Role> roles;
 
     public User() {
     }
@@ -64,6 +92,14 @@ public class User implements Serializable {
 
     public void setLocked(Boolean locked) {
         this.locked = locked;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override

@@ -1,15 +1,13 @@
 package com.git.yanlei.jpa.entity.joined_table;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity(name ="NonTeachingStaffJoin")
-@Table(name = "T_NONTEACHING_STAFF")
+@Table(name = "T_NONTEACHING_STAFF_JOIN")
 @PrimaryKeyJoinColumn(name =  "C_ID")
-@DiscriminatorValue("2")
 public class NonTeachingStaff extends Staff {
 
     private static final long serialVersionUID = 4179496741991513104L;
