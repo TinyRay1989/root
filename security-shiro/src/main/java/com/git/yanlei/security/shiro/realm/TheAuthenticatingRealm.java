@@ -7,7 +7,7 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.shiro.util.ByteSource;
 
-public class Demo6Realm extends AuthenticatingRealm{
+public class TheAuthenticatingRealm extends AuthenticatingRealm{
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)

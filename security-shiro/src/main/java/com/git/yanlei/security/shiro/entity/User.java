@@ -1,17 +1,21 @@
 package com.git.yanlei.security.shiro.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -28,19 +32,34 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+    @Column(unique = false)
     private String username;
     private String password;
     private String salt;
 
     private Boolean locked = Boolean.FALSE;
 
-    @OneToMany
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
-        name = "sys_users_roles",
-        joinColumns = {@JoinColumn(name = "user_id")}, 
-        inverseJoinColumns = {@JoinColumn(name = "role_id")}
+        name = "sys_users_roles", 
+        joinColumns = { @JoinColumn(
+            name = "user_id", 
+            foreignKey = @ForeignKey(
+                foreignKeyDefinition = "none", 
+                value = ConstraintMode.NO_CONSTRAINT
+                )
+            ) 
+        }, 
+        inverseJoinColumns = { @JoinColumn(
+            name = "role_id", 
+            foreignKey = @ForeignKey(
+                foreignKeyDefinition = "none", 
+                value = ConstraintMode.NO_CONSTRAINT
+                )
+            ) 
+        }
     )
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<Role>();
 
     public User() {
     }

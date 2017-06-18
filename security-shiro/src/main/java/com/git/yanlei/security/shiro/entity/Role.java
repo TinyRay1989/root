@@ -1,20 +1,31 @@
 package com.git.yanlei.security.shiro.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 
 @Entity
 @Table(name = "sys_roles")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "userCache")
+@Cacheable(true)
 public class Role implements Serializable {
     private static final long serialVersionUID = 7037793812835469613L;
     @Id
@@ -25,13 +36,27 @@ public class Role implements Serializable {
     private String description; // 角色描述,UI界面显示使用
     private Boolean available = Boolean.FALSE; // 是否可用,如果不可用将不会添加给用户
 
-    @OneToMany
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
         name = "sys_roles_permissions",
-        joinColumns = {@JoinColumn(name = "role_id")}, 
-        inverseJoinColumns = {@JoinColumn(name = "permission_id")}
+        joinColumns = {@JoinColumn(
+            name = "role_id",
+            foreignKey = @ForeignKey(
+                foreignKeyDefinition = "none",
+                value = ConstraintMode.NO_CONSTRAINT
+                )
+            )
+        }, 
+        inverseJoinColumns = {@JoinColumn(
+            name = "permission_id",
+            foreignKey = @ForeignKey(
+                foreignKeyDefinition = "none",
+                value = ConstraintMode.NO_CONSTRAINT
+                )
+            )
+        }
     )
-    private Set<Permission> permissions;
+    private Set<Permission> permissions = new HashSet<Permission>();
 
     public Role() {
     }

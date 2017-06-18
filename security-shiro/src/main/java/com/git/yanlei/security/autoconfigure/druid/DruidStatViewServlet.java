@@ -1,4 +1,4 @@
-package com.git.yanlei.security.shiro.autoconfigure.druid;
+package com.git.yanlei.security.autoconfigure.druid;
 
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;

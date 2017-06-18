@@ -12,4 +12,5 @@ public interface UserService {
     public User find(String username);
     public Set<String> findRoles(String username);
     public Set<String> findPermissions(String username);
+    public void changePassword(Long userId, String newPassword);
 }

@@ -15,7 +15,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 
 import com.git.yanlei.security.shiro.authorizer.permission.BitPermission;
 
-public class Demo5Realm extends AuthorizingRealm{
+public class TheAuthorizingRealm extends AuthorizingRealm{
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)
