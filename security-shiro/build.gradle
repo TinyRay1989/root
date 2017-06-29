@@ -14,7 +14,10 @@ sourceCompatibility = 1.7
 
 repositories { mavenCentral() }
 
-configurations { providedRuntime }
+configurations { 
+    provided 
+    providedRuntime 
+}
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
@@ -28,6 +31,8 @@ dependencies {
     compile group: 'net.sf.ehcache', name: 'ehcache-core', version: '2.6.11'
     compile group: 'com.alibaba', name: 'druid', version: '1.0.29'
     runtime group: 'mysql', name: 'mysql-connector-java', version: '5.1.42'
+    compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper'
+    compile group: 'jstl', name: 'jstl', version: '1.2'
     providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
     testCompile('junit:junit:4.12')
     testCompile('org.springframework.boot:spring-boot-starter-test')

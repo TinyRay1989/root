@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.git.yanlei.security.shiro.PasswordHelper;
+import com.git.yanlei.security.shiro.dao.PermissionRepository;
 import com.git.yanlei.security.shiro.dao.RoleRepository;
 import com.git.yanlei.security.shiro.dao.UserRepository;
 import com.git.yanlei.security.shiro.entity.Permission;
@@ -27,6 +28,9 @@ public class UserServiceImpl implements UserService {
     
     @Resource
     private RoleRepository roleRepository;
+    
+    @Resource
+    private PermissionRepository permissionRepository;
 
     @Override
     public User create(User user) {
@@ -73,7 +77,8 @@ public class UserServiceImpl implements UserService {
     public Set<String> findRoles(String username) {
         User user = userRepository.findByUsername(username);
         Set<String> result = new HashSet<String>();
-        for (Role role : user.getRoles()) {
+        Set<Role> roles = user.getRoles();
+        for (Role role : roles) {
             result.add(role.getRole());
         }
         return result;

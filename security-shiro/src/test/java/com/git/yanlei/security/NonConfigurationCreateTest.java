@@ -11,6 +11,7 @@ import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ThreadContext;
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +22,7 @@ import com.git.yanlei.security.shiro.authorizer.permission.BitAndWildPermissionR
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Ignore
 public class NonConfigurationCreateTest {
 
     @Test

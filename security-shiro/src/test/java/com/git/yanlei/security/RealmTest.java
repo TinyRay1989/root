@@ -7,6 +7,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,6 +29,7 @@ import com.git.yanlei.security.shiro.service.UserService;
 @Transactional
 //@Commit
 @Rollback
+@Ignore
 public class RealmTest {
     
     @Resource

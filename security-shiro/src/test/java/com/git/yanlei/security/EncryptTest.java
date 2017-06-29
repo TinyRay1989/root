@@ -22,6 +22,7 @@ import org.apache.shiro.util.ThreadContext;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -33,6 +34,7 @@ import com.git.yanlei.security.util.LoginUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Ignore
 public class EncryptTest {
     private String str = "hello";
 
