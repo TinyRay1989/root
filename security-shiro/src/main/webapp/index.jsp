@@ -9,6 +9,8 @@
 <a href="${pageContext.request.contextPath}/authenticated">已身份认证</a><br/>
 <a href="${pageContext.request.contextPath}/role">角色授权</a><br/>
 <a href="${pageContext.request.contextPath}/permission">权限授权</a><br/>
+<a href="${pageContext.request.contextPath}/hello1">hello1</a><br/>
+<a href="${pageContext.request.contextPath}/hello2">hello2</a><br/>
 
 </body>
 </html>

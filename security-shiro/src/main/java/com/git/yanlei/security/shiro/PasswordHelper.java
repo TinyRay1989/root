@@ -11,8 +11,8 @@ public class PasswordHelper {
 
     private static RandomNumberGenerator randomNumberGenerator = new SecureRandomNumberGenerator();
 
-    private static final String ALGORITHM_NAME = "md5";
-    private static final int HASH_ITERATIONS = 2;
+    public static final String ALGORITHM_NAME = "md5";
+    public static final int HASH_ITERATIONS = 2;
 
     public static void encryptPassword(User user) {
         user.setSalt(randomNumberGenerator.nextBytes().toHex());

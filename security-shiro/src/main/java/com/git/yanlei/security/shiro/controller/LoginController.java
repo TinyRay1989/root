@@ -33,7 +33,7 @@ public class LoginController {
         String password = req.getParameter("password");
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        token.setRememberMe(true);
+        token.setRememberMe(false);
         try {
             subject.login(token);
         } catch (UnknownAccountException e) {
@@ -101,5 +101,10 @@ public class LoginController {
     @RequestMapping(value = "/unauthorized", method = RequestMethod.GET)
     public String unauthorized() {
         return "unauthorized";
+    }
+    
+    @RequestMapping(value = "/403", method = RequestMethod.GET)
+    public String page403() {
+        return "redirect:/unauthorized";
     }
 }

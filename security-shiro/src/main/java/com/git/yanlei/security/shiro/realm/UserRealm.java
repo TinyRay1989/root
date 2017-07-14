@@ -18,12 +18,11 @@ import com.git.yanlei.security.shiro.entity.User;
 import com.git.yanlei.security.shiro.service.UserService;
 
 public class UserRealm extends AuthorizingRealm {
-    
+
     private static final String NAME = "userRealm";
-    
+
     @Resource
     private UserService userService;
-    
 
     @Override
     public String getName() {
@@ -44,20 +43,17 @@ public class UserRealm extends AuthorizingRealm {
             throws AuthenticationException {
         String username = (String) token.getPrincipal();
         User user = userService.find(username);
-        if(user == null){
+        if (user == null) {
             throw new UnknownAccountException();
         }
-        if(user.getLocked()){
+        if (user.getLocked()) {
             throw new LockedAccountException();
         }
-        SimpleAuthenticationInfo authInfo = new SimpleAuthenticationInfo(
-                user.getUsername(),
-                user.getPassword(),
-                ByteSource.Util.bytes(user.getCredentialsSalt()),
-                getName() );
+        SimpleAuthenticationInfo authInfo = new SimpleAuthenticationInfo(user.getUsername(),
+                user.getPassword(), ByteSource.Util.bytes(user.getCredentialsSalt()), getName());
         return authInfo;
     }
-    
+
     @Override
     public void clearCache(PrincipalCollection principals) {
         super.clearCache(principals);
